@@ -5,11 +5,18 @@ function App() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState();
 
   const submitLogin = () => {
     axios.post('http://127.0.0.1:3001/api/login', {email, password})
       .then((response) => {
-        console.log(response);
+        console.log(response.status);
+        setName('')
+        setEmail('')
+      })
+      .catch(err => {
+        setError(err)
+        console.log(err)
       })
   }
 
@@ -17,6 +24,9 @@ function App() {
     axios.post('http://127.0.0.1:3001/api/register', {name, email, password})
       .then((response) => {
         console.log(response);
+        setName('')
+        setEmail('')
+        setPassword('')
       })
   }
   
